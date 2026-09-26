@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bella Cucina — Italian Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #fdf6ec;
+      --brown:   #3b1f0e;
+      --gold:    #c8843a;
+      --gold-lt: #e4a355;
+      --gray:    #6b6b6b;
+      --white:   #ffffff;
+      --radius:  12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--brown);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--brown);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold-lt);
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: #e8d9c5;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-lt); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 88vh;
+      background:
+        linear-gradient(to bottom, rgba(30,10,0,0.65) 0%, rgba(30,10,0,0.4) 60%, rgba(30,10,0,0.7) 100%),
+        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=80') center/cover no-repeat;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .hero-tag {
+      font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-lt); margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .hero p {
+      color: #e0cfbe;
+      font-size: 1.1rem;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      padding: 0.85rem 2.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      transition: background 0.25s, transform 0.15s;
+    }
+    .btn:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--gold-lt);
+      color: var(--gold-lt);
+      margin-left: 1rem;
+    }
+    .btn-outline:hover { background: var(--gold-lt); color: var(--white); }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; }
+    .section-label {
+      text-align: center;
+      font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .section-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--gray);
+      max-width: 540px;
+      margin: 0 auto 3rem;
+      font-size: 0.97rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .about-img {
+      width: 100%; height: 420px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px rgba(59,31,14,0.18);
+    }
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+    }
+    .about-text p { color: var(--gray); margin-bottom: 1rem; }
+    .about-text .btn { margin-top: 0.5rem; }
+
+    /* ── MENU ── */
+    #menu { background: var(--cream); }
+    .menu-tabs {
+      display: flex; justify-content: center; gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .tab-btn {
+      padding: 0.5rem 1.4rem;
+      border: 2px solid var(--gold);
+      background: transparent;
+      color: var(--brown);
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--gold);
+      color: var(--white);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.75rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .menu-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(59,31,14,0.09);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .menu-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(59,31,14,0.14); }
+    .menu-card img { width: 100%; height: 200px; object-fit: cover; }
+    .menu-card-body { padding: 1.25rem; }
+    .menu-card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.4rem; }
+    .menu-card-body p { color: var(--gray); font-size: 0.88rem; margin-bottom: 1rem; }
+    .menu-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .price { font-weight: 700; font-size: 1.1rem; color: var(--gold); }
+    .add-btn {
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .add-btn:hover { background: var(--gold-lt); }
+
+    /* hidden menu items */
+    .menu-card[data-cat] { display: none; }
+    .menu-card[data-cat].visible { display: block; }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--white); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 220px 220px;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .gallery-grid img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.35s;
+    }
+    .gallery-grid img:hover { transform: scale(1.04); }
+    .gallery-grid .span2 { grid-column: span 2; }
+
+    /* ── RESERVATION ── */
+    #reserve { background: var(--brown); color: var(--cream); }
+    #reserve .section-label { color: var(--gold-lt); }
+    #reserve .section-title { color: var(--white); }
+    #reserve .section-sub { color: #c8b49d; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; color: #c8b49d; font-weight: 500; }
+    input, select, textarea {
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(200,180,157,0.3);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(200,180,157,0.45); }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold-lt); }
+    select option { background: var(--brown); }
+    textarea { resize: vertical; min-height: 100px; }
+    .form-submit { grid-column: 1 / -1; text-align: center; margin-top: 0.5rem; }
+    .form-submit .btn { padding: 0.9rem 3rem; font-size: 1rem; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--cream); }
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .contact-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(59,31,14,0.08);
+    }
+    .contact-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .contact-card h4 { font-weight: 600; margin-bottom: 0.4rem; }
+    .contact-card p { color: var(--gray); font-size: 0.9rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown);
+      color: #c8b49d;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.88rem;
+    }
+    footer a { color: var(--gold-lt); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-grid .span2 { grid-column: span 1; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: auto; }
+      .form-submit { grid-column: auto; }
+      .btn-outline { margin-left: 0; margin-top: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Bella Cucina</a>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reserve">Reserve</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag">Est. 1987 · Rome · New York</p>
+  <h1>Taste the<br/>Heart of Italy</h1>
+  <p>Authentic handcrafted pasta, wood-fired pizza, and the finest Italian wines — served with warmth and passion.</p>
+  <div>
+    <a href="#menu" class="btn">View Menu</a>
+    <a href="#reserve" class="btn btn-outline">Book a Table</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <img
+      class="about-img"
+      src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
+      alt="Chef preparing Italian dish"
+    />
+    <div class="about-text">
+      <p class="section-label">Our Story</p>
+      <h2>Food Made With<br/>Love Since 1987</h2>
+      <p>Bella Cucina was born in a small kitchen in Rome, where Chef Marco Rossi learned the art of cooking from his grandmother. Every recipe carries decades of tradition, using only the freshest seasonal ingredients sourced from local farms.</p>
+      <p>Today our family restaurant serves hundreds of guests every week, but the soul remains the same — honest, generous Italian cooking that makes you feel at home.</p>
+      <a href="#reserve" class="btn">Reserve a Table</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <p class="section-label">What We Serve</p>
+  <h2 class="section-title">Our Menu</h2>
+  <p class="section-sub">Fresh ingredients, timeless recipes. Every dish is made to order.</p>
+
+  <div class="menu-tabs">
+    <button class="tab-btn active" data-filter="all">All</button>
+    <button class="tab-btn" data-filter="starter">Starters</button>
+    <button class="tab-btn" data-filter="pasta">Pasta</button>
+    <button class="tab-btn" data-filter="pizza">Pizza</button>
+    <button class="tab-btn" data-filter="dessert">Desserts</button>
+  </div>
+
+  <div class="menu-grid">
+    <!-- Starters -->
+    <div class="menu-card visible" data-cat="starter">
+      <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=600&q=80" alt="Bruschetta" />
+      <div class="menu-card-body">
+        <h3>Bruschetta al Pomodoro</h3>
+        <p>Toasted sourdough, fresh cherry tomatoes, basil, extra-virgin olive oil.</p>
+        <div class="menu-card-footer">
+          <span class="price">$9</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card visible" data-cat="starter">
+      <img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=600&q=80" alt="Caprese" />
+      <div class="menu-card-body">
+        <h3>Insalata Caprese</h3>
+        <p>Buffalo mozzarella, heirloom tomatoes, fresh basil, aged balsamic glaze.</p>
+        <div class="menu-card-footer">
+          <span class="price">$13</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pasta -->
+    <div class="menu-card visible" data-cat="pasta">
+      <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80" alt="Carbonara" />
+      <div class="menu-card-body">
+        <h3>Spaghetti alla Carbonara</h3>
+        <p>Guanciale, Pecorino Romano, egg yolk, black pepper. Classic Roman style.</p>
+        <div class="menu-card-footer">
+          <span class="price">$18</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card visible" data-cat="pasta">
+      <img src="https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=600&q=80" alt="Lasagna" />
+      <div class="menu-card-body">
+        <h3>Lasagna al Forno</h3>
+        <p>Slow-braised beef ragù, handmade pasta sheets, béchamel, Parmigiano.</p>
+        <div class="menu-card-footer">
+          <span class="price">$22</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pizza -->
+    <div class="menu-card visible" data-cat="pizza">
+      <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80" alt="Margherita" />
+      <div class="menu-card-body">
+        <h3>Pizza Margherita</h3>
+        <p>San Marzano tomato, fior di latte mozzarella, fresh basil. Wood-fired.</p>
+        <div class="menu-card-footer">
+          <span class="price">$16</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card visible" data-cat="pizza">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Truffle Pizza" />
+      <div class="menu-card-body">
+        <h3>Pizza al Tartufo</h3>
+        <p>Black truffle cream, fontina, wild mushrooms, thyme, Parmigiano shavings.</p>
+        <div class="menu-card-footer">
+          <span class="price">$28</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desserts -->
+    <div class="menu-card visible" data-cat="dessert">
+      <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&q=80" alt="Tiramisu" />
+      <div class="menu-card-body">
+        <h3>Tiramisù</h3>
+        <p>Mascarpone cream, espresso-soaked ladyfingers, dark cocoa. Made fresh daily.</p>
+        <div class="menu-card-footer">
+          <span class="price">$11</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card visible" data-cat="dessert">
+      <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80" alt="Panna Cotta" />
+      <div class="menu-card-body">
+        <h3>Panna Cotta al Frutti</h3>
+        <p>Vanilla cream, seasonal berry compote, mint. Light and silky.</p>
+        <div class="menu-card-footer">
+          <span class="price">$10</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <p class="section-label">The Experience</p>
+  <h2 class="section-title">Our Restaurant</h2>
+  <p class="section-sub">A warm atmosphere for every occasion — date nights, family dinners, and celebrations.</p>
+  <div class="gallery-grid">
+    <img class="span2" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80" alt="Restaurant interior" />
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Plated dish" />
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600&q=80" alt="Wine" />
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Food" />
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section id="reserve">
+  <p class="section-label">Book a Table</p>
+  <h2 class="section-title">Make a Reservation</h2>
+  <p class="section-sub">Join us for an unforgettable evening. We'll have everything ready for you.</p>
+
+  <form class="form-grid" onsubmit="handleReservation(event)">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input id="name" type="text" placeholder="Marco Rossi" required />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="marco@example.com" required />
+    </div>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input id="date" type="date" required />
+    </div>
+    <div class="form-group">
+      <label for="time">Time</label>
+      <select id="time" required>
+        <option value="">Select a time</option>
+        <option>12:00 PM</option>
+        <option>12:30 PM</option>
+        <option>1:00 PM</option>
+        <option>6:00 PM</option>
+        <option>6:30 PM</option>
+        <option>7:00 PM</option>
+        <option>7:30 PM</option>
+        <option>8:00 PM</option>
+        <option>8:30 PM</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="guests">Guests</label>
+      <select id="guests" required>
+        <option value="">Number of guests</option>
+        <option>1 Guest</option>
+        <option>2 Guests</option>
+        <option>3 Guests</option>
+        <option>4 Guests</option>
+        <option>5 Guests</option>
+        <option>6+ Guests</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input id="phone" type="tel" placeholder="+1 555 000 0000" />
+    </div>
+    <div class="form-group full">
+      <label for="notes">Special Requests</label>
+      <textarea id="notes" placeholder="Allergies, special occasions, seating preferences…"></textarea>
+    </div>
+    <div class="form-submit">
+      <button type="submit" class="btn">Confirm Reservation</button>
+    </div>
+  </form>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Find Us</p>
+  <h2 class="section-title">Contact & Location</h2>
+  <p class="section-sub">We're open Tuesday–Sunday. Reservations recommended on weekends.</p>
+  <div class="contact-cards">
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <h4>Address</h4>
+      <p>142 Little Italy Lane<br/>New York, NY 10013</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">🕐</div>
+      <h4>Opening Hours</h4>
+      <p>Tue – Fri: 12pm – 10pm<br/>Sat – Sun: 11am – 11pm</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📞</div>
+      <h4>Phone</h4>
+      <p>+1 (212) 555-0182<br/>Reservations welcome</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">✉️</div>
+      <h4>Email</h4>
+      <p>hello@bellacucina.com<br/>We reply within 24h</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Playfair Display',serif; font-size:1.3rem; color:#e4a355; margin-bottom:0.5rem;">Bella Cucina</p>
+  <p>142 Little Italy Lane, New York · <a href="tel:+12125550182">+1 (212) 555-0182</a> · <a href="mailto:hello@bellacucina.com">hello@bellacucina.com</a></p>
+  <p style="margin-top:1rem; color:#7a6350;">© 2026 Bella Cucina. All rights reserved.</p>
+</footer>
+
+<script>
+  // ── Menu tab filter ──
+  const tabs = document.querySelectorAll('.tab-btn');
+  const cards = document.querySelectorAll('.menu-card[data-cat]');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.cat === filter) {
+          card.classList.add('visible');
+        } else {
+          card.classList.remove('visible');
+        }
+      });
+    });
+  });
+
+  // ── Reservation form ──
+  function handleReservation(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    alert(`Thank you, ${name}! Your reservation request has been received. We'll confirm by email shortly.`);
+    e.target.reset();
+  }
+
+  // ── Set date min to today ──
+  const dateInput = document.getElementById('date');
+  dateInput.min = new Date().toISOString().split('T')[0];
+</script>
+
+</body>
+</html>
