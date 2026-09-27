@@ -4,26 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bella Cucina — Italian Restaurant</title>
+  <meta name="description" content="Handmade pasta, wood-fired pizza, and a warm Roman table at Bella Cucina in New York." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream:   #fdf6ec;
-      --brown:   #3b1f0e;
-      --gold:    #c8843a;
-      --gold-lt: #e4a355;
-      --gray:    #6b6b6b;
+      --cream:   #f6f5ef;
+      --brown:   #18352d;
+      --gold:    #bf4f38;
+      --gold-lt: #e17b58;
+      --gray:    #66736d;
       --white:   #ffffff;
-      --radius:  12px;
+      --radius:  5px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       background: var(--cream);
       color: var(--brown);
       line-height: 1.6;
@@ -38,7 +39,7 @@
       height: 64px;
     }
     .nav-logo {
-      font-family: 'Playfair Display', serif;
+      font-family: 'DM Serif Display', serif;
       color: var(--gold-lt);
       font-size: 1.5rem;
       text-decoration: none;
@@ -53,10 +54,24 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--gold-lt); }
+    .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-toggle, .cart-toggle {
+      min-height: 42px;
+      border: 1px solid rgba(255,255,255,0.28);
+      background: transparent;
+      color: var(--white);
+      cursor: pointer;
+      font: 600 0.9rem 'DM Sans', sans-serif;
+    }
+    .nav-toggle { display: none; width: 44px; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
+    .nav-toggle span:not(.sr-only) { width: 18px; height: 2px; background: currentColor; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .cart-toggle { display: inline-flex; align-items: center; gap: 0.65rem; padding: 0 0.8rem; }
+    .cart-count { display: grid; width: 24px; height: 24px; place-items: center; border-radius: 50%; background: var(--gold); color: var(--white); font-size: 0.78rem; }
 
     /* ── HERO ── */
     .hero {
-      min-height: 88vh;
+      min-height: min(720px, 78svh);
       background:
         linear-gradient(to bottom, rgba(30,10,0,0.65) 0%, rgba(30,10,0,0.4) 60%, rgba(30,10,0,0.7) 100%),
         url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=80') center/cover no-repeat;
@@ -69,8 +84,8 @@
       color: var(--gold-lt); margin-bottom: 1rem;
     }
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-family: 'DM Serif Display', serif;
+      font-size: 5rem;
       color: var(--white);
       line-height: 1.1;
       margin-bottom: 1.25rem;
@@ -86,7 +101,7 @@
       background: var(--gold);
       color: var(--white);
       padding: 0.85rem 2.2rem;
-      border-radius: 50px;
+      border-radius: 4px;
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
@@ -111,8 +126,8 @@
     }
     .section-title {
       text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.65rem;
       margin-bottom: 0.75rem;
     }
     .section-sub {
@@ -140,7 +155,7 @@
       box-shadow: 0 8px 32px rgba(59,31,14,0.18);
     }
     .about-text h2 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'DM Serif Display', serif;
       font-size: 2rem;
       margin-bottom: 1.2rem;
     }
@@ -161,7 +176,7 @@
       color: var(--brown);
       border-radius: 50px;
       cursor: pointer;
-      font-family: 'Inter', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 0.9rem;
       font-weight: 500;
       transition: all 0.2s;
@@ -187,7 +202,7 @@
     .menu-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(59,31,14,0.14); }
     .menu-card img { width: 100%; height: 200px; object-fit: cover; }
     .menu-card-body { padding: 1.25rem; }
-    .menu-card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.4rem; }
+    .menu-card-body h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; margin-bottom: 0.4rem; }
     .menu-card-body p { color: var(--gray); font-size: 0.88rem; margin-bottom: 1rem; }
     .menu-card-footer {
       display: flex; align-items: center; justify-content: space-between;
@@ -198,7 +213,7 @@
       color: var(--white);
       border: none;
       padding: 0.4rem 1rem;
-      border-radius: 50px;
+      border-radius: 4px;
       cursor: pointer;
       font-size: 0.85rem;
       font-weight: 600;
@@ -250,7 +265,7 @@
       border-radius: 8px;
       background: rgba(255,255,255,0.07);
       color: var(--white);
-      font-family: 'Inter', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 0.95rem;
       outline: none;
       transition: border-color 0.2s;
@@ -292,9 +307,71 @@
     }
     footer a { color: var(--gold-lt); text-decoration: none; }
 
+    /* ── ORDER DRAWER ── */
+    [hidden] { display: none !important; }
+    .cart-backdrop { position: fixed; inset: 0; z-index: 150; background: rgba(13,27,23,0.58); }
+    .cart-panel {
+      position: fixed;
+      inset: 0 0 0 auto;
+      z-index: 151;
+      display: flex;
+      width: min(420px, 100%);
+      height: 100dvh;
+      flex-direction: column;
+      background: var(--cream);
+      color: var(--brown);
+      box-shadow: -12px 0 40px rgba(0,0,0,0.18);
+    }
+    .cart-header, .cart-footer { padding: 1.4rem 1.5rem; }
+    .cart-header { display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid rgba(24,53,45,0.15); }
+    .cart-header h2 { font: 2rem 'DM Serif Display', serif; }
+    .cart-header p { color: var(--gold); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .cart-close, .cart-clear, .quantity-control button {
+      min-height: 40px;
+      border: 1px solid rgba(24,53,45,0.25);
+      background: transparent;
+      color: var(--brown);
+      cursor: pointer;
+      font: 600 0.85rem 'DM Sans', sans-serif;
+    }
+    .cart-close { padding: 0 0.8rem; }
+    .cart-items { display: grid; gap: 1rem; overflow: auto; padding: 1.5rem; list-style: none; }
+    .cart-empty { margin: auto; padding: 2rem; color: var(--gray); text-align: center; }
+    .cart-item { display: grid; grid-template-columns: 1fr auto; gap: 0.3rem 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(24,53,45,0.14); }
+    .cart-item-name { font-weight: 700; }
+    .cart-item-price { color: var(--gray); font-size: 0.88rem; }
+    .quantity-control { display: flex; align-items: center; gap: 0.55rem; }
+    .quantity-control button { width: 36px; min-height: 34px; }
+    .cart-footer { margin-top: auto; border-top: 1px solid rgba(24,53,45,0.15); }
+    .cart-subtotal { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.05rem; font-weight: 700; }
+    .cart-clear { width: 100%; }
+    .toast { position: fixed; right: 1rem; bottom: 1rem; z-index: 160; max-width: min(360px, calc(100vw - 2rem)); padding: 0.9rem 1.1rem; background: var(--brown); color: var(--white); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .reservation-status { grid-column: 1 / -1; min-height: 1.5em; color: #f2c6a7; text-align: center; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
+      nav { position: sticky; padding: 0 1rem; }
+      .nav-toggle { display: flex; }
       .nav-links { display: none; }
+      .nav-links.is-open {
+        position: absolute;
+        top: 64px;
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 1rem 1rem;
+        background: var(--brown);
+      }
+      .nav-links.is-open a { display: block; padding: 0.75rem 0; }
+      .nav-logo { font-size: 1.25rem; }
+      .cart-toggle { padding: 0 0.55rem; }
+      .hero { min-height: 72svh; padding: 2rem 1.25rem; }
+      .hero h1 { font-size: 3.5rem; }
+      .hero p { font-size: 1rem; }
+      .section-title { font-size: 2.15rem; }
+      section { padding: 4rem 1.25rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
       .gallery-grid .span2 { grid-column: span 1; }
@@ -303,6 +380,19 @@
       .form-submit { grid-column: auto; }
       .btn-outline { margin-left: 0; margin-top: 0.75rem; }
     }
+    @media (max-width: 420px) {
+      .nav-logo { font-size: 1.05rem; }
+      .nav-toggle { width: 38px; }
+      .nav-actions { gap: 0.4rem; }
+      .cart-toggle { gap: 0.4rem; font-size: 0.82rem; }
+      .hero h1 { font-size: 3rem; }
+      .hero > div { display: flex; flex-direction: column; align-items: center; }
+      .hero .btn { width: min(240px, 100%); text-align: center; }
+      .btn-outline { margin-left: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
@@ -310,14 +400,37 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Bella Cucina</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="primary-navigation">
     <li><a href="#about">Our Story</a></li>
     <li><a href="#menu">Menu</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#reserve">Reserve</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div class="nav-actions">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <button class="cart-toggle" type="button" aria-haspopup="dialog" aria-controls="order-panel">
+      Your order <span class="cart-count" aria-live="polite">0</span>
+    </button>
+  </div>
 </nav>
+
+<div class="cart-backdrop" hidden></div>
+<aside class="cart-panel" id="order-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
+  <div class="cart-header">
+    <div><p>Your evening</p><h2 id="cart-title">Your order</h2></div>
+    <button class="cart-close" type="button" aria-label="Close order">Close</button>
+  </div>
+  <p class="cart-empty">Your table is waiting. Add a dish from the menu to get started.</p>
+  <ul class="cart-items" aria-label="Items in your order"></ul>
+  <div class="cart-footer">
+    <p class="cart-subtotal"><span>Subtotal</span><span>$0.00</span></p>
+    <button class="cart-clear" type="button">Clear order</button>
+  </div>
+</aside>
+<div class="toast" role="status" aria-live="polite" hidden></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -535,6 +648,7 @@
     <div class="form-submit">
       <button type="submit" class="btn">Confirm Reservation</button>
     </div>
+    <p class="reservation-status" role="status" aria-live="polite"></p>
   </form>
 </section>
 
@@ -569,7 +683,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p style="font-family:'Playfair Display',serif; font-size:1.3rem; color:#e4a355; margin-bottom:0.5rem;">Bella Cucina</p>
+  <p style="font-family:'DM Serif Display',serif; font-size:1.3rem; color:#e17b58; margin-bottom:0.5rem;">Bella Cucina</p>
   <p>142 Little Italy Lane, New York · <a href="tel:+12125550182">+1 (212) 555-0182</a> · <a href="mailto:hello@bellacucina.com">hello@bellacucina.com</a></p>
   <p style="margin-top:1rem; color:#7a6350;">© 2026 Bella Cucina. All rights reserved.</p>
 </footer>
